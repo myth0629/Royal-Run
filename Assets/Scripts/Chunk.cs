@@ -81,6 +81,5 @@ public class Chunk : MonoBehaviour
             Vector3 spawanPosition = new Vector3(lanes[randomLaneIndex], transform.position.y, spawnPositionZ); // 코인 생성 위치
             Instantiate(coinPrefab, spawanPosition, Quaternion.identity, transform); // 코인 생성
         }
-
     }
 }
