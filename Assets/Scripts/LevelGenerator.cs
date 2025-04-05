@@ -9,6 +9,9 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] Transform chunkParent;
     [SerializeField] float chunkLength = 10f; // 청크의 길이
     [SerializeField] float moveSpeed = 8f; // 청크 이동 속도
+    [SerializeField] float minMoveSpeed = 2f;
+    [SerializeField] float maxMoveSpeed = 20f; // 최대 이동 속도
+
 
     List<GameObject> chunks = new List<GameObject>(); // 청크 리스트
 
@@ -22,6 +25,25 @@ public class LevelGenerator : MonoBehaviour
     {
         MoveChunks();
         // 청크를 이동시키고, 필요에 따라 새로운 청크를 생성합니다.
+    }
+
+    public void ChunkMoveSpeed(float speed)
+    {
+        moveSpeed += speed;
+        // 청크 이동 속도를 설정합니다.
+
+        if(moveSpeed < minMoveSpeed)
+        {
+            moveSpeed = minMoveSpeed;
+            // 최소 이동 속도를 설정합니다.
+        }
+        else if(moveSpeed > maxMoveSpeed)
+        {
+            moveSpeed = maxMoveSpeed;
+            // 최대 이동 속도를 설정합니다.
+        }
+
+        Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z - speed);
     }
 
     private void GenerateChunk()
